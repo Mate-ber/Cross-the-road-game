@@ -50,3 +50,4 @@ class CarManager:
                 game_over.goto(0, 0)
                 game_over.write(f"Game Over! You Lost!",  align="center", font=("Courier", 30, "normal"))
                 return True
+
