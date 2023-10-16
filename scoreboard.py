@@ -16,4 +16,3 @@ class Scoreboard:
         self.title.clear()
         self.title.write(f"Level: {self.level} ", align="left", font=(FONT))
 
-
