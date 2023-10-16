@@ -1,9 +1,10 @@
 import turtle
 import random
+from turtle import Screen
 COLORS = ["red", "orange", "yellow", "green", "blue", "purple"]
 STARTING_MOVE_DISTANCE = 5
 MOVE_INCREMENT = 10
-
+screen = Screen()
 
 class CarManager:
     def __init__(self):
@@ -33,3 +34,19 @@ class CarManager:
     def new_level(self):
         self.car_speed += MOVE_INCREMENT
         self.car_cnt += 1
+
+    def car_needed(self, c_car):
+        if c_car % 100 == 0:
+            self.create_car()
+
+    def game_over(self, x, y):
+        for car in self.cars:
+            if 20 > car.ycor() - y > -20 and 30 > car.xcor() - x > -30:
+                game_is_on = False
+                screen.clear()
+                game_over = turtle.Turtle()
+                game_over.color("black")
+                game_over.hideturtle()
+                game_over.goto(0, 0)
+                game_over.write(f"Game Over! You Lost!",  align="center", font=("Courier", 30, "normal"))
+                return True
