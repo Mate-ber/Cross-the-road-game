@@ -1,6 +1,5 @@
 import time
 from turtle import Screen
-import turtle
 from player import Player
 from car_manager import CarManager
 from scoreboard import Scoreboard
@@ -18,31 +17,21 @@ screen.onkeypress(player.move_up, "w")
 screen.onkeypress(player.move_down, "s")
 
 game_is_on = True
-create_car = 0
+c_car = 0
 
 while game_is_on:
 
-    for car in cars.cars:
-        if 20 > car.ycor() - player.ycor() > -20 and 30 > car.xcor() - player.xcor() > -30:
-            game_is_on = False
-            screen.clear()
-            game_over = turtle.Turtle()
-            game_over.color("black")
-            game_over.hideturtle()
-            game_over.goto(0, 0)
-            game_over.write(f"Game Over! You Lost!",  align="center", font=("Courier", 30, "normal"))
-            break
+    if cars.game_over(player.xcor(), player.ycor()):
+        break
 
-    if player.ycor() >= 270:
-        player.new_level()
+    if player.is_finished():
         cars.new_level()
         score.update_score()
 
-    if create_car % 100 == 0:
-        cars.create_car()
+    cars.car_needed(c_car)
 
-    create_car += 10
     cars.move()
+    c_car += 10
     time.sleep(.1)
     screen.update()
 
