@@ -23,3 +23,9 @@ class Player(turtle.Turtle):
 
     def new_level(self):
         self.goto(STARTING_POSITION)
+
+    def is_finished(self):
+        if self.ycor() >= 270:
+            self.new_level()
+            return True
+
